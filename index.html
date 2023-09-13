@@ -4,53 +4,144 @@
     <title>Registration Form</title>
     <style>
         /* Your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Registration Form</h2>
         <form id="registrationForm">
-            <!-- Your form fields here (same as before) -->
-            
-            <button type="submit">Submit</button>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="occupation">Occupation:</label>
+                <input type="text" id="occupation" name="occupation" required>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills:</label>
+                <input type="text" id="skills" name="skills" required>
+            </div>
+
+            <button type="button" onclick="submitForm()">Submit</button>
         </form>
         <div id="confirmationMessage"></div>
     </div>
 
     <script>
-        document.getElementById("registrationForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+        function submitForm() {
+            // Get form data
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            const phone = document.getElementById("phone").value;
+            const email = document.getElementById("email").value;
+            const address = document.getElementById("address").value;
+            const occupation = document.getElementById("occupation").value;
+            const skills = document.getElementById("skills").value;
 
-            // Collect form data
-            const formData = new FormData(event.target);
+            // You can collect other form data in a similar way
 
-            // Convert form data to a JSON object
-            const formDataObj = {};
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
+            // Simulate form submission
+            // Replace this with actual form submission code
+            const formData = {
+                name: name,
+                age: age,
+                gender: gender,
+                phone: phone,
+                email: email,
+                address: address,
+                occupation: occupation,
+                skills: skills
+                // Add other form fields here
+            };
 
-            // Send form data to the server (you can replace this with your preferred method)
-            // For simplicity, we're using the Fetch API to send data to a PHP script
-            fetch("process_form.php", {
-                method: "POST",
-                body: JSON.stringify(formDataObj),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display a confirmation message
-                document.getElementById("confirmationMessage").innerHTML = "Your details have been saved successfully!";
-                
-                // Clear the form
-                document.getElementById("registrationForm").reset();
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-        });
+            // Display a confirmation message
+            const confirmationMessage = document.getElementById("confirmationMessage");
+            confirmationMessage.innerHTML = "Your details have been saved successfully!";
+
+            // You can replace the above confirmation with your data handling logic
+            // For example, you can use JavaScript to send the data to a server
+            // or store it in a database.
+        }
     </script>
 </body>
 </html>
